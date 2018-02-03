@@ -15,29 +15,28 @@ app.use(bodyParser.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-var characters = [
+var reservation = [
   {
-    routeName: "yoda",
-    name: "Yoda",
-    role: "Jedi Master",
-    age: 900,
-    forcePoints: 2000
+    name: "frank smith",
+    phone: "123-123-1234",
+    email: "frank@smith.com",
+    id: 900
   },
   {
-    routeName: "darthmaul",
-    name: "Darth Maul",
-    role: "Sith Lord",
-    age: 200,
-    forcePoints: 1200
+    name: "john smith",
+    phone: "444-123-1234",
+    email: "john@smith.com",
+    id: 903
   },
   {
-    routeName: "obiwankenobi",
-    name: "Obi Wan Kenobi",
-    role: "Jedi Master",
-    age: 55,
-    forcePoints: 1350
+    name: "bob smith",
+    phone: "555-123-1234",
+    email: "bob@smith.com",
+    id: 902
   }
 ];
+
+var wait = [];
 
 // Routes
 // =============================================================
@@ -55,23 +54,16 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
-// Search for Specific Character (or all characters) - provides JSON
+// show the reservation
 app.get("/api/tables", function(req, res) {
-  var chosen = req.params.characters;
-
-  if (chosen) {
-    console.log(chosen);
-
-    for (var i = 0; i < characters.length; i++) {
-      if (chosen === characters[i].routeName) {
-        return res.json(characters[i]);
-      }
-    }
-    return res.json(false);
-  }
-  return res.json(characters);
+  return res.json(reservation);
 });
 
+// show the waitlist
+app.get("/api/waitlist", function(req, res) {
+  return res.json(wait);
+});
+/*
 // Search for Specific Character (or all characters) - provides JSON
 app.get("/api/:characters?", function(req, res) {
   var chosen = req.params.characters;
@@ -103,10 +95,10 @@ app.post("/api/new", function(req, res) {
   characters.push(newcharacter);
 
   res.json(newcharacter);
-});
+});*/
 
 // Starts the server to begin listening
-// =============================================================
+// =============================================================*/
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });
