@@ -53,7 +53,6 @@ app.get("/tables", function(req, res) {
 app.post("/api/clear", function(req, res) {
   reservation = [];
   wait = [];
-  console.log("i tried!");
 });
 
 app.get("/reserve", function(req, res) {
@@ -90,10 +89,12 @@ app.post("/api/tables", function(req, res) {
   if(reservation.length < 5)
   {
   	reservation.push(myReservation);
+  	res.json(true);
   }
   else
   {
   	wait.push(myReservation);
+  	res.json(false);
   }
 });
 
