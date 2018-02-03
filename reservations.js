@@ -17,22 +17,22 @@ app.use(bodyParser.json());
 // =============================================================
 var reservation = [
   {
-    name: "frank smith",
-    phone: "123-123-1234",
-    email: "frank@smith.com",
-    id: 900
+    customerName: "frank smith",
+    phoneNumber: "123-123-1234",
+    customerEmail: "frank@smith.com",
+    customerID: 900
   },
   {
-    name: "john smith",
-    phone: "444-123-1234",
-    email: "john@smith.com",
-    id: 903
+    customerName: "john smith",
+    phoneNumber: "444-123-1234",
+    customerEmail: "john@smith.com",
+    customerID: 903
   },
   {
-    name: "bob smith",
-    phone: "555-123-1234",
-    email: "bob@smith.com",
-    id: 902
+    customerName: "bob smith",
+    phoneNumber: "555-123-1234",
+    customerEmail: "bob@smith.com",
+    customerID: 902
   }
 ];
 
@@ -50,6 +50,12 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
+app.post("/api/clear", function(req, res) {
+  reservation = [];
+  wait = [];
+  console.log("i tried!");
+});
+
 app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
@@ -63,39 +69,7 @@ app.get("/api/tables", function(req, res) {
 app.get("/api/waitlist", function(req, res) {
   return res.json(wait);
 });
-/*
-// Search for Specific Character (or all characters) - provides JSON
-app.get("/api/:characters?", function(req, res) {
-  var chosen = req.params.characters;
 
-  if (chosen) {
-    console.log(chosen);
-
-    for (var i = 0; i < characters.length; i++) {
-      if (chosen === characters[i].routeName) {
-        return res.json(characters[i]);
-      }
-    }
-    return res.json(false);
-  }
-  return res.json(characters);
-});
-
-// Create New Characters - takes in JSON input
-app.post("/api/new", function(req, res) {
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body-parser middleware
-  var newcharacter = req.body;
-  // Using a RegEx Pattern to remove spaces from newCharacter
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
-
-  console.log(newcharacter);
-
-  characters.push(newcharacter);
-
-  res.json(newcharacter);
-});*/
 
 app.post("/api/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
@@ -106,10 +80,10 @@ app.post("/api/tables", function(req, res) {
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
   var myReservation = {};
 
-  myReservation.name = newReservation.customerName;
-  myReservation.phone = newReservation.phoneNumber;
-  myReservation.email = newReservation.customerEmail;
-  myReservation.id = newReservation.customerID;
+  myReservation.customerName = newReservation.customerName;
+  myReservation.phoneNumber = newReservation.phoneNumber;
+  myReservation.customerEmail = newReservation.customerEmail;
+  myReservation.customerID = newReservation.customerID;
 
   console.log(myReservation);
 
